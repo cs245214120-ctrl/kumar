@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/username/bmi-app.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'cp -r * /var/www/html/'
+            }
+        }
+    }
+}
